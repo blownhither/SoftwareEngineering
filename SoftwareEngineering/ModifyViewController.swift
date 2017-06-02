@@ -105,6 +105,12 @@ class ModifyViewController: UIViewController {
     
     // Called when press “完成” button
     func done() {
+        /*
+         TEST: 3
+         我感觉这里好像应该有一个循环
+         循环测试
+         或者搞一个别的测试
+         */
         // Read from record file, append one more and write back
         let documentPath = NSHomeDirectory() + "/Documents"
         let tasks = NSArray(contentsOfFile: documentPath + "/task")!

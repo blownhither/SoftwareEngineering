@@ -73,7 +73,14 @@ class RegisterViewController: UIViewController {
     
     
     func register(){
-        
+        /*
+         TEST: 2
+         基本路径测试
+         */
+        /*
+         TEST: 5
+         因果图
+         */
         let documentPath = NSHomeDirectory() + "/Documents/user"
         print(documentPath)
         var accountInfo = NSArray(contentsOfFile: documentPath) as! [NSDictionary]
@@ -118,8 +125,7 @@ class RegisterViewController: UIViewController {
             alertView.show()
             accountInfo.append(["user": accountInfo.count, "id": idTextField.text!,"password": passwordTextField.text!])
             (accountInfo as NSArray).write(toFile: documentPath, atomically: true)
-            
-            
+            navigationController?.popViewController(animated: true)
         }else{
             var alertInfo = ""
             for i in wrongInfo{

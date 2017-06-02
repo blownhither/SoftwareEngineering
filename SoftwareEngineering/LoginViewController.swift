@@ -108,6 +108,14 @@ class LoginViewController: UIViewController {
     var user,password:String!;
     func login() {
         /*
+         TEST: 1
+         逻辑覆盖测试
+         */
+        /*
+         TEST: 4
+         等价类划分
+         */
+        /*
          TODO: 5
          验证用户名密码并存储用户登录信息
          */
