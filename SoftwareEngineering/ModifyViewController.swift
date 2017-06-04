@@ -117,7 +117,17 @@ class ModifyViewController: UIViewController {
         var mutable:[NSDictionary] = tasks as! [NSDictionary]
         
         // The new item defined in this view
-        let newItem : NSDictionary = [ "title": dscTextField.text ?? "未命名任务", "importance": importancePicker.selectedRow(inComponent: 0) + 1, "startDate": readDate(datePicker: startDatePicker), "endDate": readDate(datePicker: endDatePicker), "task":0, "user":0]
+        var trimedTitle = (dscTextField.text!).trimmingCharacters(in: .whitespaces)
+        if(trimedTitle.characters.count < 1) {
+            trimedTitle = "未命名任务"
+        }
+        
+        if(startDatePicker.date > endDatePicker.date) {
+            alert(message: "开始日期晚于结束日期")
+            return
+        }
+        
+        let newItem : NSDictionary = [ "title": trimedTitle, "importance": importancePicker.selectedRow(inComponent: 0) + 1, "startDate": readDate(datePicker: startDatePicker), "endDate": readDate(datePicker: endDatePicker), "task":0, "user":0]
         mutable.append(newItem)
         lastUpdatedItem = newItem
         
@@ -129,7 +139,7 @@ class ModifyViewController: UIViewController {
          已处理任务添加和修改
          */
         
-        
+        alert(message: "添加成功")
         navigationController?.popViewController(animated: true)
         
         //TODO: IMPORTANT! refresh task view!
@@ -139,6 +149,11 @@ class ModifyViewController: UIViewController {
     
     func getLastUpdateItem() -> NSDictionary {
         return lastUpdatedItem
+    }
+    
+    func alert(message : String) {
+        let alertView = UIAlertView(title:"添加任务参数错误", message:message,delegate: self, cancelButtonTitle: "确定");
+        alertView.show();
     }
 }
 
@@ -155,7 +170,7 @@ extension ModifyViewController: UITextFieldDelegate, UIPickerViewDelegate, UIPic
         return 1
     }
     
-    // Five level in importancePicker
+    // Five levels in importancePicker
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return 5;
     }
